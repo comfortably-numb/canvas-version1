@@ -8,9 +8,33 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="canvas"></div>
+    <canvas id="canvas"> </canvas>
     <script>
-      canvas.onclick = (e) => {
+      let canvas = document.getElementById("canvas");
+      canvas.width = document.documentElement.clientWidth;
+      canvas.height = document.documentElement.clientHeight;
+      let ctx = canvas.getContext("2d");
+
+      let painting = false;
+
+      ctx.fillStyle = "blue";
+      canvas.onmousedown = () => {
+        painting = true;
+      };
+      canvas.onmouseup = () => {
+        painting = false;
+      };
+      canvas.onmousemove = (e) => {
+        if (painting === true) {
+          ctx.fillRect(e.clientX - 5, e.clientY - 5, 10, 10);
+        } else {
+          console.log("什么都不做");
+        }
+      };
+    </script>
+    <!-- <div id="canvas"></div>
+    <script>
+      canvas.onmousemove = (e) => {
         console.log(e.clientX);
         console.log(e.clientY);
         //console.log调试大法
@@ -26,6 +50,6 @@
         div.style.backgroundColor = "black";
         canvas.appendChild(div);
       };
-    </script>
+    </script> -->
   </body>
 </html>
